@@ -1,0 +1,19 @@
+> Measure the color contrast ratio of the line in the area charts and the bars in the bar 
+  charts against the background. Adjust the visual colors as needed so they have a color contrast ratio of 3:1 against the background. https://contrastchecker.com or Colour Contrast Analyser may be helpful for this requirement.
+> Measure the color contrast ratio of the text in one card, one area chart, and one bar chart.
+    Adjust the text color of all the cards, area charts, and bar charts as needed so it has a
+    color contrast ratio of 4.5:1 against the background.
+> Add alt text to all non-decorative visuals on the page. Check out this Nightingale article
+  if you need some inspiration for writing your alt text. When consuming a Power BI visual with a screen reader, Power BI announces the visual title, the visual type, and then the alt text.
+> Update titles to be as descriptive and useful as possible. For visuals, that have the title 
+  hidden, add a descriptive title and then turn off the title. For example, the revenues area chart might be titled “Total Revenues by Year in USD, 2005 – 2017”.
+> Set the tab order on the page so the page title textbox  (NCAA Revenues & Expenses | 
+  Summary View) is first, the year slicer is second, and the Revenues card is third. The 
+  Revenues area chart should be fourth and the Revenues bar chart should be fifth. Continue
+  this order with the Expenses and Profits visuals.
+> Mark any decorative shapes or images (such as the line shape under the page title text box 
+  in the provided file) as decorative so it is hidden from tab order.
+> Use keyboard shortcuts to navigate the report and do the following:
+    Set the year slicer to 2017, review the report, and then clear the slicer selection.
+    Select the SEC conference in the Revenues bar chart. Then navigate through the revenues
+    area chart to the year 2007 and find the Total Revenues amount.

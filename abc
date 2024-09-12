@@ -1,0 +1,95 @@
+RankAmount = 
+VAR SelectedParameter = SELECTEDVALUE(Table[ParameterID])
+VAR CurrentClaim = Table[ClaimID]
+VAR CurrentAmount = Table[Amount]
+VAR AmountsTable = 
+    FILTER(
+        Table,
+        Table[ParameterID] = SelectedParameter &&
+        Table[ClaimID] = CurrentClaim
+    )
+VAR RankedTable = 
+    ADDCOLUMNS(
+        AmountsTable,
+        "Rank",
+        RANKX(
+            AmountsTable,
+            Table[Amount],
+            ,
+            DESC,
+            DENSE
+        )
+    )
+RETURN
+    MAXX(
+        FILTER(
+            RankedTable,
+            Table[Amount] = CurrentAmount
+        ),
+        [Rank]
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RankAmount = 
+VAR SelectedParameter = SELECTEDVALUE(Table[ParameterID])
+VAR CurrentClaim = Table[ClaimID]
+VAR CurrentAmount = Table[Amount]
+VAR AmountsTable = 
+    FILTER(
+        Table,
+        Table[ParameterID] = SelectedParameter &&
+        Table[ClaimID] = CurrentClaim
+    )
+VAR RankTable = 
+    ADDCOLUMNS(
+        AmountsTable,
+        "Rank",
+        RANKX(
+            AmountsTable,
+            Table[Amount],
+            ,
+            DESC,
+            DENSE
+        )
+    )
+VAR RankList = 
+    SUMMARIZE(
+        RankTable,
+        Table[Amount],
+        "Rank",
+        MAX([Rank])
+    )
+VAR MaxRank = 
+    MAXX(
+        RankList,
+        [Rank]
+    )
+RETURN
+    IF(
+        CurrentAmount = MAXX(FILTER(RankTable, [Rank] = 1), Table[Amount]),
+        1,
+        IF(
+            CurrentAmount = MINX(FILTER(RankTable, [Rank] = 1), Table[Amount]),
+            0,
+            MAXX(FILTER(RankList, [Amount] = CurrentAmount), [Rank])
+        )
+    )

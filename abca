@@ -6,3 +6,23 @@ VAR Amount = SUMX(
 )
 RETURN
 CALCULATE(Amount,FILTER(Table,Table[PARAMETER ID] IN SelectedParameterIDs))
+
+FINALIZED_LEAKAGE_AMOUNT_ = 
+VAR SelectedParameterIDs = VALUES(Table[PARAMETER ID])
+VAR UniqueClaims = 
+    SUMMARIZE(
+        Table,
+        Table[CLAIM ID],
+        "MaxAmount", MAX(Table[FINALIZED LEAKAGE AMOUNT])
+    )
+VAR Amount = 
+    SUMX(
+        FILTER(
+            UniqueClaims,
+            Table[PARAMETER ID] IN SelectedParameterIDs
+        ),
+        [MaxAmount]
+    )
+RETURN
+    Amount
+

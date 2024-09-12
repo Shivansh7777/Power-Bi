@@ -21,6 +21,24 @@ VAR Amount =
             UniqueClaims,
             Table[PARAMETER ID] IN SelectedParameterIDs
         ),
+
+
+
+
+
+
+
+
+IsUniqueClaim = 
+IF(
+    CALCULATE(
+        COUNTROWS(Table),
+        FILTER(Table, Table[CLAIM ID] = EARLIER(Table[CLAIM ID]))
+    ) = 1,
+    1,
+    0
+)
+
         [MaxAmount]
     )
 RETURN
